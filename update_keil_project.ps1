@@ -28,7 +28,7 @@ try {
     $content = $content -replace '([\\/])main\.c', '$1main.cpp'
     
     # Write the updated content back to the file
-    $content | Set-Content $ProjectFile -NoNewline -Encoding UTF8
+    $content | Set-Content $ProjectFile -Encoding UTF8
     
     Write-Host "[SUCCESS] Updated $ProjectFile"
     exit 0

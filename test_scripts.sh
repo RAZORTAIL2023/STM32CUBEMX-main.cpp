@@ -144,8 +144,10 @@ grep "main\." "$TEST_DIR/test.uvprojx"
 # Simulate the PowerShell replacement (using sed in Linux)
 echo ""
 echo "[POST-GEN] Updating Keil project file..."
-sed -i 's/\\main\.c/\\main.cpp/g' "$TEST_DIR/test.uvprojx"
-sed -i 's/>main\.c</>main.cpp</g' "$TEST_DIR/test.uvprojx"
+# Pattern 1: <FileName>main.c</FileName> -> <FileName>main.cpp</FileName>
+sed -i 's/<FileName>main\.c<\/FileName>/<FileName>main.cpp<\/FileName>/g' "$TEST_DIR/test.uvprojx"
+# Pattern 2: Path separators (\ or /) followed by main.c
+sed -i 's/\([\/\\]\)main\.c/\1main.cpp/g' "$TEST_DIR/test.uvprojx"
 
 echo "[AFTER] Content:"
 grep "main\." "$TEST_DIR/test.uvprojx"
