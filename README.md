@@ -10,7 +10,7 @@
 
 ### 问题背景
 
-STM32CubeMX 支持 Keil 生态，但不支持使用 ARMAC6 的 Keil 生态，确切地说不支持写 C++ 的 Keil 用户。而对于 C++ 代码编写者，一个 main.cpp 才能够上承 ST-HAL 库 C 代码，下接用户 C++ 代码。
+STM32CubeMX 支持 Keil 生态，但不支持使用 ARM Compiler 6 (ARMCC6) 的 Keil 生态，确切地说不支持写 C++ 的 Keil 用户。而对于 C++ 代码编写者，一个 main.cpp 才能够上承 ST-HAL 库 C 代码，下接用户 C++ 代码。
 
 ### 解决方案
 
@@ -79,8 +79,9 @@ STM32CubeMX 支持 Keil 生态，但不支持使用 ARMAC6 的 Keil 生态，确
 1. **需要 STM32CubeMX 6.12+**：脚本功能需要此版本及以上
 2. **Windows 环境**：批处理脚本仅在 Windows 上运行
 3. **PowerShell 依赖**：post_generate.bat 使用 PowerShell 更新 XML 文件，确保系统已安装
-4. **备份项目**：首次使用前建议备份项目
-5. **Keil 项目**：脚本专门为 Keil MDK 设计，其他 IDE 可能需要手动配置
+4. **PowerShell 执行策略**：脚本使用 `-ExecutionPolicy Bypass` 以确保兼容性。如果您的系统有更严格的安全要求，可以修改脚本使用 `-ExecutionPolicy RemoteSigned` 并对 PowerShell 脚本进行签名
+5. **备份项目**：首次使用前建议备份项目
+6. **Keil 项目**：脚本专门为 Keil MDK 设计，其他 IDE 可能需要手动配置
 
 ### 工作原理
 
@@ -137,7 +138,7 @@ MIT License - 自由使用和修改
 
 ### Problem Background
 
-STM32CubeMX supports the Keil ecosystem but doesn't support Keil with ARMAC6 compiler, specifically for C++ developers. For C++ code writers, a main.cpp file is needed to bridge ST-HAL library C code with user C++ code.
+STM32CubeMX supports the Keil ecosystem but doesn't support Keil with ARM Compiler 6 (ARMCC6), specifically for C++ developers. For C++ code writers, a main.cpp file is needed to bridge ST-HAL library C code with user C++ code.
 
 ### Solution
 
@@ -206,8 +207,9 @@ Click the **GENERATE CODE** button. The scripts will automatically:
 1. **Requires STM32CubeMX 6.12+**: Script feature requires this version or higher
 2. **Windows Only**: Batch scripts only run on Windows
 3. **PowerShell Required**: post_generate.bat uses PowerShell to update XML files
-4. **Backup Projects**: Recommended to backup before first use
-5. **Keil Projects**: Scripts are designed for Keil MDK, other IDEs may need manual configuration
+4. **PowerShell Execution Policy**: Scripts use `-ExecutionPolicy Bypass` for compatibility. If your system has stricter security requirements, you can modify the scripts to use `-ExecutionPolicy RemoteSigned` and sign the PowerShell script
+5. **Backup Projects**: Recommended to backup before first use
+6. **Keil Projects**: Scripts are designed for Keil MDK, other IDEs may need manual configuration
 
 ### How It Works
 

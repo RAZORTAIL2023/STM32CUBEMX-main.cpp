@@ -60,6 +60,8 @@ for /r %%f in (*.uvprojx) do (
         echo Found Keil project: %%f
         
         REM Use PowerShell script to replace main.c with main.cpp in the project file
+        REM Note: Using -ExecutionPolicy Bypass for maximum compatibility
+        REM For stricter security, you can change to -ExecutionPolicy RemoteSigned
         powershell -ExecutionPolicy Bypass -File "update_keil_project.ps1" "%%f"
         
         if !ERRORLEVEL! EQU 0 (
@@ -89,6 +91,8 @@ for /r %%f in (*.uvoptx) do (
         echo Found Keil options file: %%f
         
         REM Use PowerShell script to replace main.c with main.cpp in the options file
+        REM Note: Using -ExecutionPolicy Bypass for maximum compatibility
+        REM For stricter security, you can change to -ExecutionPolicy RemoteSigned
         powershell -ExecutionPolicy Bypass -File "update_keil_project.ps1" "%%f"
         
         if !ERRORLEVEL! EQU 0 (

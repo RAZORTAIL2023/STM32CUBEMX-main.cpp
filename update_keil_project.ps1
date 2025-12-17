@@ -28,6 +28,8 @@ try {
     $content = $content -replace '([\\/])main\.c', '$1main.cpp'
     
     # Write the updated content back to the file
+    # Note: Set-Content automatically adds proper line endings for the platform
+    # This preserves the XML file format correctly
     $content | Set-Content $ProjectFile -Encoding UTF8
     
     Write-Host "[SUCCESS] Updated $ProjectFile"
