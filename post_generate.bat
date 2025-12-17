@@ -63,7 +63,7 @@ for /r %%f in (*.uvprojx) do (
         set "TEMPFILE=%%f.tmp"
         
         REM Use PowerShell to replace main.c with main.cpp in the project file
-        powershell -Command "(Get-Content '%%f') -replace '\\main\.c', '\main.cpp' | Set-Content '!TEMPFILE!'"
+        powershell -Command "(Get-Content '%%f') -replace 'main\.c', 'main.cpp' | Set-Content '!TEMPFILE!'"
         
         if exist "!TEMPFILE!" (
             REM Replace original file with updated file
@@ -97,7 +97,7 @@ for /r %%f in (*.uvoptx) do (
         set "TEMPFILE=%%f.tmp"
         
         REM Use PowerShell to replace main.c with main.cpp in the options file
-        powershell -Command "(Get-Content '%%f') -replace '\\main\.c', '\main.cpp' | Set-Content '!TEMPFILE!'"
+        powershell -Command "(Get-Content '%%f') -replace 'main\.c', 'main.cpp' | Set-Content '!TEMPFILE!'"
         
         if exist "!TEMPFILE!" (
             REM Replace original file with updated file
