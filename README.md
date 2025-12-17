@@ -9,3 +9,8 @@ STM32CUBEMX 支持 Keil 生态，但不支持使用 ARMAC6 的 Keil 生态，确
 - 需要一个脚本，将 CUBEMX 生成的 main.c 找到并修改为 main.cpp
 - 该脚本还应当找到新的 Keil 项目组织结构文件，将其中的 main.c 有关量改为 main.cpp 逻辑。
 - 另需一个脚本，每次将上一次留存的 main.cpp 改为 main.c。
+
+如何使用：
+将 Script 文件夹放到你的工作目录， 注意其中的脚本假设 Keil 项目目录在 ..\MDK-ARM\.uvprojx
+在CUBEMX项目中 Project Manager -> Code Generator -> User Actions 中添加相应脚本路径。
+请简单测试后再使用，修改 .uvprojx 之前，会创建一个备份在原本的目录。
