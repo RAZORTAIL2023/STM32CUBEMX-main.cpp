@@ -14,16 +14,17 @@ STM32CubeMX 支持 Keil 生态，但不支持使用 ARMAC6 的 Keil 生态，确
 
 ### 解决方案
 
-本仓库提供两个批处理脚本，利用 STM32CubeMX 6.12+ 版本支持的代码生成前后脚本调用功能：
+本仓库提供脚本，利用 STM32CubeMX 6.12+ 版本支持的代码生成前后脚本调用功能：
 
 1. **pre_generate.bat** - 代码生成前执行，将上一次的 main.cpp 改回 main.c
 2. **post_generate.bat** - 代码生成后执行，将新生成的 main.c 改为 main.cpp，并更新 Keil 项目文件
+3. **update_keil_project.ps1** - PowerShell 脚本，用于更新 Keil 项目文件中的引用
 
 ### 使用方法
 
 #### 步骤 1: 下载脚本
 
-将 `pre_generate.bat` 和 `post_generate.bat` 下载到您的 STM32 项目根目录。
+将 `pre_generate.bat`、`post_generate.bat` 和 `update_keil_project.ps1` 下载到您的 STM32 项目根目录。
 
 #### 步骤 2: 在 STM32CubeMX 中配置脚本
 
@@ -64,8 +65,14 @@ STM32CubeMX 支持 Keil 生态，但不支持使用 ARMAC6 的 Keil 生态，确
 - 在 CubeMX 生成代码后运行
 - 执行三个步骤：
   1. 将 `Core/Src/main.c` 重命名为 `main.cpp`
-  2. 更新所有 `.uvprojx` 文件中的 main.c 引用
-  3. 更新所有 `.uvoptx` 文件中的 main.c 引用
+  2. 调用 `update_keil_project.ps1` 更新所有 `.uvprojx` 文件中的 main.c 引用
+  3. 调用 `update_keil_project.ps1` 更新所有 `.uvoptx` 文件中的 main.c 引用
+
+#### update_keil_project.ps1
+
+- PowerShell 脚本，由 post_generate.bat 调用
+- 使用精确的正则表达式仅替换 main.c 为 main.cpp
+- 不会影响项目中的其他 .c 文件
 
 ### 注意事项
 
@@ -134,16 +141,17 @@ STM32CubeMX supports the Keil ecosystem but doesn't support Keil with ARMAC6 com
 
 ### Solution
 
-This repository provides two batch scripts that leverage STM32CubeMX 6.12+ script execution feature:
+This repository provides scripts that leverage STM32CubeMX 6.12+ script execution feature:
 
 1. **pre_generate.bat** - Runs before code generation, renames main.cpp back to main.c
 2. **post_generate.bat** - Runs after code generation, renames main.c to main.cpp and updates Keil project files
+3. **update_keil_project.ps1** - PowerShell script to update Keil project file references
 
 ### Usage
 
 #### Step 1: Download Scripts
 
-Download `pre_generate.bat` and `post_generate.bat` to your STM32 project root directory.
+Download `pre_generate.bat`, `post_generate.bat`, and `update_keil_project.ps1` to your STM32 project root directory.
 
 #### Step 2: Configure Scripts in STM32CubeMX
 
@@ -184,8 +192,14 @@ Click the **GENERATE CODE** button. The scripts will automatically:
 - Runs after CubeMX generates code
 - Performs three operations:
   1. Renames `Core/Src/main.c` to `main.cpp`
-  2. Updates all `.uvprojx` files to reference main.cpp
-  3. Updates all `.uvoptx` files to reference main.cpp
+  2. Calls `update_keil_project.ps1` to update all `.uvprojx` files to reference main.cpp
+  3. Calls `update_keil_project.ps1` to update all `.uvoptx` files to reference main.cpp
+
+#### update_keil_project.ps1
+
+- PowerShell script called by post_generate.bat
+- Uses precise regex patterns to replace only main.c with main.cpp
+- Does not affect other .c files in your project
 
 ### Important Notes
 

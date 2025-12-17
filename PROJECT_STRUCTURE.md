@@ -12,6 +12,7 @@ YourSTM32Project/
 ├── YourProject.ioc              # STM32CubeMX project file / CubeMX 项目文件
 ├── pre_generate.bat             # Pre-generation script / 生成前脚本
 ├── post_generate.bat            # Post-generation script / 生成后脚本
+├── update_keil_project.ps1      # PowerShell script for updating Keil files / 更新 Keil 文件的脚本
 │
 ├── Core/
 │   ├── Inc/
@@ -34,12 +35,12 @@ YourSTM32Project/
 ### Step by Step / 详细步骤
 
 1. **Download Scripts / 下载脚本**
-   - Download `pre_generate.bat` and `post_generate.bat`
-   - 下载 `pre_generate.bat` 和 `post_generate.bat`
+   - Download `pre_generate.bat`, `post_generate.bat`, and `update_keil_project.ps1`
+   - 下载 `pre_generate.bat`、`post_generate.bat` 和 `update_keil_project.ps1`
 
 2. **Place Scripts / 放置脚本**
-   - Copy both scripts to your project root (where .ioc file is located)
-   - 将两个脚本复制到项目根目录（.ioc 文件所在位置）
+   - Copy all scripts to your project root (where .ioc file is located)
+   - 将所有脚本复制到项目根目录（.ioc 文件所在位置）
 
 3. **Configure in CubeMX / 在 CubeMX 中配置**
    ```

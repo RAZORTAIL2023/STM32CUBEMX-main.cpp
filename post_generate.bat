@@ -59,16 +59,10 @@ for /r %%f in (*.uvprojx) do (
         set "FOUND_KEIL=1"
         echo Found Keil project: %%f
         
-        REM Create a temporary file
-        set "TEMPFILE=%%f.tmp"
+        REM Use PowerShell script to replace main.c with main.cpp in the project file
+        powershell -ExecutionPolicy Bypass -File "update_keil_project.ps1" "%%f"
         
-        REM Use PowerShell to replace main.c with main.cpp in the project file
-        REM Multiple replace operations to target specific XML elements
-        powershell -Command "$content = Get-Content '%%f' -Raw; $content = $content -replace '(<FileName>)main\.c(</FileName>)', '$1main.cpp$2'; $content = $content -replace '([\\/])main\.c', '$1main.cpp'; $content | Set-Content '!TEMPFILE!' -NoNewline"
-        
-        if exist "!TEMPFILE!" (
-            REM Replace original file with updated file
-            move /y "!TEMPFILE!" "%%f" > nul
+        if !ERRORLEVEL! EQU 0 (
             echo [SUCCESS] Updated %%f
         ) else (
             echo [ERROR] Failed to update %%f
@@ -94,16 +88,10 @@ for /r %%f in (*.uvoptx) do (
         set "FOUND_KEIL_OPT=1"
         echo Found Keil options file: %%f
         
-        REM Create a temporary file
-        set "TEMPFILE=%%f.tmp"
+        REM Use PowerShell script to replace main.c with main.cpp in the options file
+        powershell -ExecutionPolicy Bypass -File "update_keil_project.ps1" "%%f"
         
-        REM Use PowerShell to replace main.c with main.cpp in the options file
-        REM Multiple replace operations to target specific XML elements
-        powershell -Command "$content = Get-Content '%%f' -Raw; $content = $content -replace '(<FileName>)main\.c(</FileName>)', '$1main.cpp$2'; $content = $content -replace '([\\/])main\.c', '$1main.cpp'; $content | Set-Content '!TEMPFILE!' -NoNewline"
-        
-        if exist "!TEMPFILE!" (
-            REM Replace original file with updated file
-            move /y "!TEMPFILE!" "%%f" > nul
+        if !ERRORLEVEL! EQU 0 (
             echo [SUCCESS] Updated %%f
         ) else (
             echo [ERROR] Failed to update %%f
